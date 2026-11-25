@@ -1,8 +1,8 @@
 <p align="center">
-  <img src="frontend/src/assets/Boomerr.png" alt="Boomerr Logo" width="220" />
+  <img src="frontend/src/assets/logo-5.png" alt="Boomerr Logo" width="120" />
 </p>
 
-<h1 align="center">Boomerr — Self-Hosted Website & Domain Monitoring</h1>
+<h1 align="center">Boomerr - Self-Hosted Website & Domain Monitoring</h1>
 
 <p align="center">
   <strong>An open-source, full-stack website monitoring, SSL tracking, incident diagnosis, and public status page platform.</strong>
