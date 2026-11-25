@@ -103,7 +103,9 @@ class CommunityEditionTest extends TestCase
 
         $domainAIService = app(DomainAnalysisService::class);
         $domainAnalysis = $domainAIService->analyze($domain);
-        $this->assertNull($domainAnalysis['scores']['seo']);
-        $this->assertNotEmpty($domainAnalysis['suggestions']['general']);
+        $this->assertIsInt($domainAnalysis['scores']['seo']);
+        $this->assertIsInt($domainAnalysis['scores']['performance']);
+        $this->assertNotEmpty($domainAnalysis['suggestions']['performance']);
+        $this->assertNotEmpty($domainAnalysis['suggestions']['security']);
     }
 }
