@@ -30,12 +30,15 @@ Self-hosted Boomerr instances run in **Community Edition** mode with zero paywal
 ## ✨ Features
 
 - 🌐 **High-Frequency Uptime Monitoring:** Sub-minute HTTP/HTTPS ping checks, latency graphs, and response code tracking.
-- 🔒 **SSL & Domain Certificate Tracking:** Automatic alerts before certificates expire or fail validation.
+- 🛡️ **Ads Protection Engine (Google Ads & Meta Ads):** Automatically pause Google Ads campaigns and Meta (Facebook) ads the moment a landing page goes down, resuming them automatically upon recovery to prevent burning ad budgets.
+- 🔒 **SSL & Domain Certificate Tracking:** Direct socket X.509 handshake monitoring with automated alerts before certificates expire (30d, 14d, 3d).
+- 🌍 **Multi-Region Edge Probes:** Packaged Docker and AWS Lambda probe agents to verify uptime and latency globally.
 - 📡 **Real-Time WebSockets:** Live dashboard updates via Laravel Reverb without needing external third-party socket services.
-- 🤖 **Optional AI Outage Diagnostics:** Integrates with OpenAI, DeepSeek, or local Ollama instances to analyze incident headers and suggest root cause fixes.
-- 📢 **Multi-Channel Incident Alerts:** Instant notifications via Email (SMTP), Telegram, Discord, Slack, SMS (Twilio), and WhatsApp.
+- 🤖 **AI & Heuristic Outage Diagnostics:** Integrated LLM root-cause analysis (DeepSeek, OpenAI, or local Ollama) plus offline heuristic performance & SEO auditing.
+- 📢 **Multi-Channel Incident Alerts:** Instant notifications via Email (SMTP), Telegram, Discord, Slack, SMS (Twilio/MSG91), and WhatsApp.
 - 📄 **Branded Public Status Pages:** Host public or private status pages with custom domains, subscriber email alerts, and incident history feeds.
 - 👥 **Multi-Workspace & Team Support:** Role-based access control (Owners, Admins, Members) across independent workspaces.
+- 🛠️ **Built-in Diagnostic Web Tools:** Public utilities for SSL inspection, DNS lookup, global DNS propagation, and Shopify store detection.
 - 🛡️ **SSRF & Security Hardening:** Hardened URL resolution and private IP blockers to ensure security when testing user-provided URLs.
 - 🐳 **One-Command Docker Deployment:** Production-ready multi-container architecture with automated database migrations and health checks.
 
@@ -111,6 +114,8 @@ Boomerr includes powerful artisan commands for self-hosters:
 
 Detailed guides are available in the [`docs/`](docs/) directory:
 
+- 🛡️ [Ads Protection Guide (Google & Meta Ads)](docs/ads-protection-guide.md)
+- 🌍 [Edge Monitoring Probes Guide](docs/edge-monitoring-guide.md)
 - 🐳 [Docker Deployment & Production SSL Guide](docs/docker-deployment.md)
 - ⚙️ [Configuration Reference (.env)](docs/configuration-reference.md)
 - 🔧 [Troubleshooting & FAQ](docs/troubleshooting.md)
