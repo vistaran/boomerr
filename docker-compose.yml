@@ -1,0 +1,137 @@
+services:
+  db:
+    image: mariadb:11
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-secret_root_password}
+      MYSQL_DATABASE: ${DB_DATABASE:-boomerr}
+      MYSQL_USER: ${DB_USERNAME:-boomerr}
+      MYSQL_PASSWORD: ${DB_PASSWORD:-secret_db_password}
+    volumes:
+      - mariadb_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 20s
+
+  redis:
+    image: redis:7-alpine
+    restart: unless-stopped
+    command: ["redis-server", "--appendonly", "yes"]
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+
+  api:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+      target: app
+    image: boomerr-app:local
+    restart: unless-stopped
+    env_file:
+      - path: .env
+        required: false
+    environment:
+      - DB_HOST=db
+      - REDIS_HOST=redis
+      - REVERB_HOST=reverb
+      - REVERB_PORT=8080
+      - REVERB_SCHEME=http
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    volumes:
+      - storage_data:/var/www/html/storage
+    command: ["php-fpm", "-F"]
+
+  worker:
+    image: boomerr-app:local
+    restart: unless-stopped
+    env_file:
+      - path: .env
+        required: false
+    environment:
+      - DB_HOST=db
+      - REDIS_HOST=redis
+      - REVERB_HOST=reverb
+      - REVERB_PORT=8080
+      - REVERB_SCHEME=http
+    depends_on:
+      api:
+        condition: service_started
+      redis:
+        condition: service_healthy
+    volumes:
+      - storage_data:/var/www/html/storage
+    command: ["php", "artisan", "queue:work", "--queue=monitoring,notifications,system-logs,default", "--sleep=3", "--tries=3"]
+
+  scheduler:
+    image: boomerr-app:local
+    restart: unless-stopped
+    env_file:
+      - path: .env
+        required: false
+    environment:
+      - DB_HOST=db
+      - REDIS_HOST=redis
+      - REVERB_HOST=reverb
+      - REVERB_PORT=8080
+      - REVERB_SCHEME=http
+    depends_on:
+      api:
+        condition: service_started
+      db:
+        condition: service_healthy
+    volumes:
+      - storage_data:/var/www/html/storage
+    command: ["php", "artisan", "schedule:work"]
+
+  reverb:
+    image: boomerr-app:local
+    restart: unless-stopped
+    env_file:
+      - path: .env
+        required: false
+    environment:
+      - DB_HOST=db
+      - REDIS_HOST=redis
+      - REVERB_SERVER_HOST=0.0.0.0
+      - REVERB_SERVER_PORT=8080
+      - REVERB_HOST=reverb
+      - REVERB_PORT=8080
+      - REVERB_SCHEME=http
+    depends_on:
+      api:
+        condition: service_started
+      redis:
+        condition: service_healthy
+    command: ["php", "artisan", "reverb:start", "--host=0.0.0.0", "--port=8080"]
+
+  web:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+      target: web
+    image: boomerr-web:local
+    restart: unless-stopped
+    ports:
+      - "${HTTP_PORT:-8080}:80"
+    depends_on:
+      - api
+      - reverb
+    volumes:
+      - storage_data:/var/www/html/storage:ro
+
+volumes:
+  mariadb_data:
+  redis_data:
+  storage_data:

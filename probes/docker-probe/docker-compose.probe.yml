@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  boomerr-probe:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    environment:
+      - BOOMERR_SERVER_URL=${BOOMERR_SERVER_URL:-https://your-boomerr-server.com}
+      - BOOMERR_API_KEY=${BOOMERR_API_KEY:-boomerr_monitoring_secret_key}
+      - PROBE_REGION=${PROBE_REGION:-eu-central-1}
+      - PROBE_LOCATION=${PROBE_LOCATION:-Frankfurt (Germany)}
+      - PROBE_INTERVAL=${PROBE_INTERVAL:-30}
+      - PROBE_TIMEOUT=${PROBE_TIMEOUT:-10}

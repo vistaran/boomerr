@@ -1,0 +1,54 @@
+name: Bug Report
+description: Report an issue or bug to help improve Boomerr
+title: "[Bug]: "
+labels: ["bug", "needs-triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for reporting an issue! Please check if a similar issue has already been reported.
+  - type: textarea
+    id: description
+    attributes:
+      label: Bug Description
+      description: A clear and concise description of what the bug is.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Steps to Reproduce
+      description: Detailed steps to reproduce the behavior.
+      placeholder: |
+        1. Go to '...'
+        2. Click on '....'
+        3. Scroll down to '....'
+        4. See error
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected Behavior
+      description: What you expected to happen.
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment & Deployment Details
+      description: Information about your deployment environment.
+      placeholder: |
+        - Boomerr Version:
+        - Deployment Type: (Docker Compose / Bare Metal)
+        - Operating System: (Ubuntu 24.04 / Debian 12 / macOS / Windows WSL)
+        - Browser: (Chrome / Firefox / Safari)
+        - Reverse Proxy: (None / Caddy / Nginx / Traefik)
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Relevant Log Output
+      description: Output from `docker compose logs` or `storage/logs/laravel.log`.
+      render: shell

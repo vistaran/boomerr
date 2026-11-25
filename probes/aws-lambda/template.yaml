@@ -1,0 +1,45 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: Boomerr Serverless Edge Monitoring Probe
+
+Parameters:
+  BoomerrServerUrl:
+    Type: String
+    Description: Base URL of your central Boomerr instance (e.g. https://boomerr.example.com)
+  BoomerrApiKey:
+    Type: String
+    NoEcho: true
+    Description: Shared API Key (MONITORING_API_KEY in Boomerr .env)
+
+Resources:
+  BoomerrMonitorFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: boomerr-monitor
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Timeout: 20
+      MemorySize: 256
+      Environment:
+        Variables:
+          BOOMERR_SERVER_URL: !Ref BoomerrServerUrl
+          BOOMERR_API_KEY: !Ref BoomerrApiKey
+
+  # Optional 5-minute heartbeat trigger
+  HeartbeatRule:
+    Type: AWS::Events::Rule
+    Properties:
+      ScheduleExpression: 'rate(5 minutes)'
+      State: ENABLED
+      Targets:
+        - Arn: !GetAtt BoomerrMonitorFunction.Arn
+          Id: BoomerrHeartbeatTarget
+          Input: '{"type":"heartbeat"}'
+
+  PermissionForEventsToInvokeLambda:
+    Type: AWS::Lambda::Permission
+    Properties:
+      FunctionName: !Ref BoomerrMonitorFunction
+      Action: lambda:InvokeFunction
+      Principal: events.amazonaws.com
+      SourceArn: !GetAtt HeartbeatRule.Arn

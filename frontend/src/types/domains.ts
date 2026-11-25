@@ -1,0 +1,26 @@
+export type Domain = {
+    id: number;
+    ulid: string;
+    workspace_id: number;
+    name: string;
+    url: string;
+    label: string | null;
+    environment: string;
+    is_active: boolean;
+    paused_reason?: 'plan_limit' | 'user' | null;
+    status: 'unknown' | 'up' | 'down';
+    last_response_time_ms: number | null;
+    max_response_time_ms: number | null;
+    min_response_time_ms: number | null;
+    last_checked_at: string | null;
+    ssl_issuer: string | null;
+    ssl_valid_from: string | null;
+    ssl_valid_to: string | null;
+    ssl_days_remaining: number | null;
+    ssl_last_checked_at: string | null;
+    domain_expires_at: string | null;
+    domain_days_remaining: number | null;
+    domain_last_checked_at: string | null;
+    created_at?: string | null;
+    updated_at?: string | null;
+};
