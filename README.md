@@ -9,6 +9,7 @@
 </p>
 
 <p align="center">
+  <a href="https://github.com/vistaran/boomerr/actions/workflows/ci.yml"><img src="https://github.com/vistaran/boomerr/actions/workflows/ci.yml/badge.svg" alt="CI Status" /></a>
   <img src="https://img.shields.io/badge/PHP-8.2-777BB4?style=flat-square&logo=php&logoColor=white" alt="PHP 8.2" />
   <img src="https://img.shields.io/badge/Laravel-12-FF2D20?style=flat-square&logo=laravel&logoColor=white" alt="Laravel 12" />
   <img src="https://img.shields.io/badge/React-19-61DAFB?style=flat-square&logo=react&logoColor=black" alt="React 19" />
@@ -48,7 +49,7 @@ Self-hosted Boomerr instances run in **Community Edition** mode with zero paywal
 
 ### 1. Clone the Repository
 ```bash
-git clone https://github.com/your-org/boomerr.git
+git clone https://github.com/vistaran/boomerr.git
 cd boomerr
 ```
 
