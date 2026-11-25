@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="frontend/src/assets/logo-5.png" alt="Boomerr Logo" width="120" />
+  <img src="https://raw.githubusercontent.com/vistaran/boomerr/main/frontend/src/assets/logo-5.png" alt="Boomerr Logo" width="120" />
 </p>
 
 <h1 align="center">Boomerr - Self-Hosted Website & Domain Monitoring</h1>

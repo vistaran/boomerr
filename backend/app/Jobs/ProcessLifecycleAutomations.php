@@ -11,6 +11,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Mail\Mailable;
 use App\Models\EmailTemplate;
 use App\Mail\Onboarding\WelcomeEmail;
@@ -80,23 +81,35 @@ class ProcessLifecycleAutomations implements ShouldQueue
 
     private function processUser(User $user)
     {
-        $this->processOnboardingSequence($user);
-        $this->processValueSummarySequence($user);
+        $lockKey = "lifecycle:process_user:{$user->id}";
+        $lock = Cache::lock($lockKey, 60);
 
-        // Billing-related sequences only run when billing is enabled
-        if (config('billing.enabled', false)) {
-            $this->processTrialEndingSequence($user);
-            $this->processChurnPreventionSequence($user);
-            $this->processMonitorLimitCheck($user);
+        if (!$lock->get()) {
+            Log::info("ProcessLifecycleAutomations: User {$user->id} is already being processed by another worker. Skipping.");
+            return;
         }
 
-        $this->processEngagementSequence($user);
+        try {
+            $this->processOnboardingSequence($user);
+            $this->processValueSummarySequence($user);
 
-        // Behavioral
-        $this->processBehavioralTriggers($user);
+            // Billing-related sequences only run when billing is enabled
+            if (config('billing.enabled', false)) {
+                $this->processTrialEndingSequence($user);
+                $this->processChurnPreventionSequence($user);
+                $this->processMonitorLimitCheck($user);
+            }
 
-        // Dynamic custom sequence steps added by administrators
-        $this->processCustomSequenceSteps($user);
+            $this->processEngagementSequence($user);
+
+            // Behavioral
+            $this->processBehavioralTriggers($user);
+
+            // Dynamic custom sequence steps added by administrators
+            $this->processCustomSequenceSteps($user);
+        } finally {
+            $lock->release();
+        }
     }
 
     private function processOnboardingSequence(User $user)
@@ -355,6 +368,7 @@ class ProcessLifecycleAutomations implements ShouldQueue
             'reactivation_email_1_running',
             'churn_email_2_highlight',
             'churn_email_3_founder',
+            'new_feature_announcement',
             'win_back_offer',
             'check_dashboard',
             'monitor_limit_reached',
@@ -428,12 +442,24 @@ class ProcessLifecycleAutomations implements ShouldQueue
 
     private function queueCustomEmail(User $user, EmailTemplate $template)
     {
-        $delivery = EmailDelivery::create([
-            'user_id' => $user->id,
-            'event_name' => $template->key,
-            'email' => $user->email,
-            'status' => 'queued',
-        ]);
+        if ($this->hasReceivedEmail($user, $template->key)) {
+            return;
+        }
+
+        $delivery = EmailDelivery::firstOrCreate(
+            [
+                'user_id' => $user->id,
+                'event_name' => $template->key,
+            ],
+            [
+                'email' => $user->email,
+                'status' => 'queued',
+            ]
+        );
+
+        if (!$delivery->wasRecentlyCreated && in_array($delivery->status, ['queued', 'sent', 'delivered'])) {
+            return;
+        }
 
         if (!$template->is_active) {
             $delivery->update(['status' => 'skipped']);
@@ -499,19 +525,54 @@ class ProcessLifecycleAutomations implements ShouldQueue
 
     private function hasReceivedEmail(User $user, string $eventName): bool
     {
+        $relatedEvents = match ($eventName) {
+            'onboarding_email_1_welcome', 'onboarding_email_1' => [
+                'onboarding_email_1_welcome',
+                'onboarding_email_1',
+            ],
+            'onboarding_email_3_configure_alerts', 'behavioral_missing_alerts' => [
+                'onboarding_email_3_configure_alerts',
+                'behavioral_missing_alerts',
+            ],
+            'onboarding_email_4_ad_pause', 'behavioral_missing_ad_pause' => [
+                'onboarding_email_4_ad_pause',
+                'behavioral_missing_ad_pause',
+            ],
+            'onboarding_email_5_add_team', 'behavioral_pending_invite' => [
+                'onboarding_email_5_add_team',
+                'behavioral_pending_invite',
+            ],
+            default => [$eventName],
+        };
+
         return EmailDelivery::where('user_id', $user->id)
-            ->where('event_name', $eventName)
+            ->whereIn('event_name', $relatedEvents)
+            ->whereIn('status', ['queued', 'sent', 'delivered'])
             ->exists();
     }
 
     private function queueEmail(User $user, string $eventName, Mailable $mailable)
     {
-        $delivery = EmailDelivery::create([
-            'user_id' => $user->id,
-            'event_name' => $eventName,
-            'email' => $user->email,
-            'status' => 'queued',
-        ]);
+        if ($this->hasReceivedEmail($user, $eventName)) {
+            return;
+        }
+
+        // Atomically claim delivery record to prevent concurrent duplicate sends
+        $delivery = EmailDelivery::firstOrCreate(
+            [
+                'user_id' => $user->id,
+                'event_name' => $eventName,
+            ],
+            [
+                'email' => $user->email,
+                'status' => 'queued',
+            ]
+        );
+
+        if (!$delivery->wasRecentlyCreated && in_array($delivery->status, ['queued', 'sent', 'delivered'])) {
+            Log::info("ProcessLifecycleAutomations: Email already queued or sent for user {$user->id} on event {$eventName}. Skipping.");
+            return;
+        }
 
         // Map behavioral event aliases to their corresponding template key
         $templateKey = match ($eventName) {
@@ -520,6 +581,32 @@ class ProcessLifecycleAutomations implements ShouldQueue
             'behavioral_pending_invite' => 'onboarding_email_5_add_team',
             default => $eventName,
         };
+
+        // Bidirectionally claim paired aliases so parallel checks and jobs cannot duplicate
+        $aliases = match ($eventName) {
+            'onboarding_email_1_welcome' => ['onboarding_email_1'],
+            'onboarding_email_1' => ['onboarding_email_1_welcome'],
+            'onboarding_email_3_configure_alerts' => ['behavioral_missing_alerts'],
+            'behavioral_missing_alerts' => ['onboarding_email_3_configure_alerts'],
+            'onboarding_email_4_ad_pause' => ['behavioral_missing_ad_pause'],
+            'behavioral_missing_ad_pause' => ['onboarding_email_4_ad_pause'],
+            'onboarding_email_5_add_team' => ['behavioral_pending_invite'],
+            'behavioral_pending_invite' => ['onboarding_email_5_add_team'],
+            default => [],
+        };
+
+        foreach ($aliases as $alias) {
+            EmailDelivery::firstOrCreate(
+                [
+                    'user_id' => $user->id,
+                    'event_name' => $alias,
+                ],
+                [
+                    'email' => $user->email,
+                    'status' => 'queued',
+                ]
+            );
+        }
 
         // Check if template exists in database
         $dbTemplate = $this->getTemplate($templateKey);
@@ -531,7 +618,7 @@ class ProcessLifecycleAutomations implements ShouldQueue
             return;
         }
 
-        if ($dbTemplate) {
+        if ($dbTemplate && !empty($dbTemplate->body_html)) {
             $data = [
                 'firstName' => explode(' ', $user->name)[0] ?? 'there',
                 'user' => $user,

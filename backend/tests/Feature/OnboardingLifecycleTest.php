@@ -79,4 +79,47 @@ class OnboardingLifecycleTest extends TestCase
             'event_name' => 'onboarding_email_1'
         ]);
     }
+
+    public function test_it_does_not_send_duplicate_welcome_emails_if_job_runs_twice()
+    {
+        Mail::fake();
+
+        $user = User::factory()->create();
+
+        // Simulate onboarding_completed event
+        $lifecycleService = app(\App\Services\LifecycleEventService::class);
+        $lifecycleService->dispatch($user, 'onboarding_completed', []);
+
+        // Process job first time
+        $job1 = new ProcessLifecycleAutomations($user);
+        $job1->handle();
+
+        // Process job second time
+        $job2 = new ProcessLifecycleAutomations($user);
+        $job2->handle();
+
+        // Mail should only be queued once
+        Mail::assertQueued(WelcomeEmail::class, 1);
+    }
+
+    public function test_it_does_not_send_duplicate_emails_across_onboarding_and_behavioral_aliases()
+    {
+        Mail::fake();
+
+        $user = User::factory()->create();
+
+        // Mark as already received onboarding_email_3_configure_alerts
+        \App\Models\EmailDelivery::create([
+            'user_id' => $user->id,
+            'event_name' => 'onboarding_email_3_configure_alerts',
+            'email' => $user->email,
+            'status' => 'delivered',
+        ]);
+
+        $job = new ProcessLifecycleAutomations($user);
+        $job->handle();
+
+        // Should NOT queue ConfigureAlertsEmail because the alias was already delivered
+        Mail::assertNotQueued(\App\Mail\Onboarding\ConfigureAlertsEmail::class);
+    }
 }
