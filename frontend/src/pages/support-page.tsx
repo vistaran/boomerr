@@ -40,7 +40,7 @@ function DiscordIcon({ className = "w-5 h-5" }: { className?: string }) {
     );
 }
 
-const SUPPORT_EMAIL = "support@boomerr.ai";
+const SUPPORT_EMAIL = import.meta.env.VITE_SUPPORT_EMAIL || "community@boomerr.org";
 const DISCORD_INVITE_URL = "https://discord.gg/SwfzDwxExc";
 
 const FAQS = [

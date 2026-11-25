@@ -52,11 +52,11 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'https://api.boomerr.ai'),
+    'url' => env('APP_URL', 'http://localhost:8080'),
 
     // Frontend base URL used for client-side routes in emails and redirects
     // Example: https://monitor.yourdomain.com
-    'frontend_url' => env('FRONTEND_URL', 'https://app.boomerr.ai'),
+    'frontend_url' => env('FRONTEND_URL', 'http://localhost:8080'),
 
     /*
     |--------------------------------------------------------------------------

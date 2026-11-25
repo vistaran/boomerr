@@ -19,7 +19,7 @@ export const AdminSettings = () => {
   });
 
   const [platformName, setPlatformName] = useState(() => localStorage.getItem("admin_platform_name") || "Boomerr");
-  const [supportEmail, setSupportEmail] = useState(() => localStorage.getItem("admin_support_email") || "support@boomerr.com");
+  const [supportEmail, setSupportEmail] = useState(() => localStorage.getItem("admin_support_email") || "support@example.com");
   const [maintenanceMode, setMaintenanceMode] = useState(() => localStorage.getItem("admin_maintenance_mode") === "true");
 
   const [slackUrl, setSlackUrl] = useState("");

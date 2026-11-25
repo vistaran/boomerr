@@ -82,16 +82,16 @@ export default function PublicStatusPageView() {
             The status page you are looking for does not exist, has been removed, or is not currently published by its owner.
           </p>
           <a
-            href="https://boomerr.ai"
+            href="/"
             className="inline-flex items-center justify-center px-6 py-3 border border-transparent text-sm font-medium rounded-xl text-white bg-indigo-600 hover:bg-indigo-700 transition-colors shadow-lg shadow-indigo-500/25 w-full sm:w-auto"
           >
-            Learn more about Boomerr
+            Go to Dashboard
           </a>
         </div>
 
         {/* Footer */}
         <div className="mt-10 sm:mt-12 text-center text-xs sm:text-sm text-slate-500 z-10">
-          Powered by <a href="https://boomerr.ai" className="font-semibold text-slate-400 hover:text-indigo-400 transition-colors">Boomerr Uptime Monitoring</a>
+          Powered by <a href="/" className="font-semibold text-slate-400 hover:text-indigo-400 transition-colors">Boomerr Community Edition</a>
         </div>
       </div>
     );
@@ -223,15 +223,14 @@ export default function PublicStatusPageView() {
         <div className="flex flex-col sm:flex-row justify-between items-center text-xs text-slate-500 mt-12 pt-8 border-t border-slate-800/60 pb-12">
           <div className="flex items-center gap-1.5 mb-4 sm:mb-0">
             <span>Status page powered by</span>
-            <a href="https://boomerr.ai" className="flex items-center gap-1.5 font-semibold text-slate-200 hover:text-indigo-400 transition-colors group">
+            <a href="/" className="flex items-center gap-1.5 font-semibold text-slate-200 hover:text-indigo-400 transition-colors group">
               <img src={Logo} alt="Boomerr Logo" className="h-4 w-4 sm:h-5 sm:w-5 opacity-90 group-hover:scale-110 transition-transform" />
               <span>Boomerr</span>
             </a>
           </div>
           <div className="flex space-x-4">
             <a href="/status" className="font-semibold text-slate-300 hover:text-indigo-400 transition-colors">System Status</a>
-            <a href="https://boomerr.ai/privacy-policy" className="hover:text-slate-400 transition-colors">Privacy Policy</a>
-            <a href="https://boomerr.ai/terms-of-service" className="hover:text-slate-400 transition-colors">Terms of Service</a>
+            <a href="https://github.com/vistaran/boomerr" target="_blank" rel="noreferrer" className="hover:text-slate-400 transition-colors">GitHub</a>
           </div>
         </div>
 

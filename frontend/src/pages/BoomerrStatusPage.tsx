@@ -61,7 +61,7 @@ export default function BoomerrStatusPage() {
       updateMeta('description', "Check the current operational status of Boomerr's global monitoring nodes, alerting services, and ad protection features. Live uptime data updated every 30 seconds.");
       updateMeta('og:title', 'Boomerr System Status', true);
       updateMeta('og:description', "Live operational status of Boomerr's global monitoring infrastructure.", true);
-      updateMeta('og:url', 'https://boomerr.ai/status', true);
+      updateMeta('og:url', typeof window !== 'undefined' ? window.location.href : '/status', true);
       updateMeta('og:type', 'website', true);
       updateMeta('og:image', ogImageUrl, true);
       updateMeta('twitter:card', 'summary_large_image');
@@ -75,12 +75,12 @@ export default function BoomerrStatusPage() {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
     'name': 'Boomerr System Status',
-    'url': 'https://boomerr.ai/status',
+    'url': typeof window !== 'undefined' ? window.location.href : '/status',
     'description': 'Real-time operational status of Boomerr monitoring infrastructure, API servers, and regional nodes.',
     'publisher': {
       '@type': 'Organization',
       'name': 'Boomerr Uptime Monitoring',
-      'url': 'https://boomerr.ai',
+      'url': typeof window !== 'undefined' ? window.location.origin : '/',
     },
   };
 
@@ -151,7 +151,7 @@ export default function BoomerrStatusPage() {
             <div className="h-px bg-gradient-to-r from-transparent via-blue-500/50 to-transparent" />
             <div className="mx-auto flex h-14 md:h-16 items-center justify-between gap-1 px-2 sm:px-4 md:px-6 lg:px-8">
               <div className="flex items-center gap-8">
-                <a href="https://boomerr.ai" className="flex items-center gap-3 group">
+                <a href="/" className="flex items-center gap-3 group">
                   <div className="flex-shrink-0 h-10 w-10 sm:h-12 sm:w-12 flex items-center justify-center">
                     <img src={Logo} alt="Boomerr Logo" className="h-9 w-9 sm:h-11 sm:w-11 object-contain group-hover:scale-105 transition-transform" />
                   </div>
@@ -166,9 +166,8 @@ export default function BoomerrStatusPage() {
                 </a>
               </div>
               <nav className="hidden md:flex items-center gap-6 text-sm font-medium">
-                <a href="https://boomerr.ai" className="text-slate-400 hover:text-white transition-colors">Features</a>
-                <a href="https://docs.boomerr.ai" className="text-slate-400 hover:text-white transition-colors">Docs</a>
-                <a href="https://boomerr.ai/pricing" className="text-slate-400 hover:text-white transition-colors">Pricing</a>
+                <a href="https://github.com/vistaran/boomerr#readme" target="_blank" rel="noreferrer" className="text-slate-400 hover:text-white transition-colors">Documentation</a>
+                <a href="https://github.com/vistaran/boomerr" target="_blank" rel="noreferrer" className="text-slate-400 hover:text-white transition-colors">GitHub</a>
               </nav>
               <div className="flex items-center gap-3">
                 <button
@@ -180,10 +179,10 @@ export default function BoomerrStatusPage() {
                   <span className="hidden sm:inline">Refresh</span>
                 </button>
                 <a
-                  href="https://app.boomerr.ai"
+                  href="/"
                   className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white text-xs font-bold px-4 py-2 rounded-lg transition-all duration-200 shadow-lg shadow-blue-500/25 hover:shadow-blue-500/40"
                 >
-                  Launch App
+                  Dashboard
                 </a>
               </div>
             </div>
@@ -288,12 +287,10 @@ export default function BoomerrStatusPage() {
         {!isAdminView && (
           <footer className="border-t border-white/[0.05] py-8 text-center text-xs text-slate-600 mt-4">
             <div className="max-w-6xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
-              <span>Powered by <a href="https://boomerr.ai" className="font-semibold text-slate-400 hover:text-blue-400 transition-colors">Boomerr Uptime Monitoring Platform</a></span>
+              <span>Powered by <a href="/" className="font-semibold text-slate-400 hover:text-blue-400 transition-colors">Boomerr Community Edition</a></span>
               <div className="flex items-center gap-5">
                 <a href="/status" className="font-semibold text-slate-300 hover:text-blue-400 transition-colors">System Status</a>
-                <a href="https://boomerr.ai/privacy-policy" className="hover:text-slate-400 transition-colors">Privacy Policy</a>
-                <a href="https://boomerr.ai/terms-of-service" className="hover:text-slate-400 transition-colors">Terms of Service</a>
-                <a href="https://boomerr.ai/contact" className="hover:text-slate-400 transition-colors">Support</a>
+                <a href="https://github.com/vistaran/boomerr" target="_blank" rel="noreferrer" className="hover:text-slate-400 transition-colors">GitHub</a>
               </div>
             </div>
           </footer>

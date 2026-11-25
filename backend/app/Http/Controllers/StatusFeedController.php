@@ -17,11 +17,16 @@ class StatusFeedController extends Controller
   {
     $incidents = BoomerrIncident::orderByDesc('incident_started_at')->take(20)->get();
 
+    $frontendUrl = rtrim(config('app.frontend_url') ?? config('app.url', 'http://localhost:8080'), '/');
+    $baseUrl = rtrim(config('app.url', 'http://localhost:8080'), '/');
+    $statusUrl = $frontendUrl . '/status';
+    $feedUrl = $baseUrl . '/api/status/feed.xml';
+
     $items = '';
     foreach ($incidents as $incident) {
       $title = e($incident->incident_title);
       $status = ucfirst($incident->incident_status);
-      $link = 'https://boomerr.ai/status';
+      $link = $statusUrl;
       $description = e($incident->incident_impact ?? 'Boomerr platform incident.');
       $pubDate = $incident->incident_started_at->toRssString();
       $guid = 'boomerr-incident-' . $incident->id;
@@ -39,18 +44,17 @@ XML;
     }
 
     $buildDate = now()->toRssString();
-    $baseUrl = config('app.url', 'https://api.boomerr.ai');
     $xml = <<<XML
 <?xml version="1.0" encoding="UTF-8"?>
 <?xml-stylesheet type="text/xsl" href="{$baseUrl}/rss-style.xsl"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Boomerr System Status</title>
-    <link>https://boomerr.ai/status</link>
-    <description>Real-time operational status of Boomerr's global monitoring infrastructure.</description>
+    <link>{$statusUrl}</link>
+    <description>Real-time operational status of Boomerr monitoring infrastructure.</description>
     <language>en-us</language>
     <lastBuildDate>{$buildDate}</lastBuildDate>
-    <atom:link href="https://boomerr.ai/api/status/feed.xml" rel="self" type="application/rss+xml"/>
+    <atom:link href="{$feedUrl}" rel="self" type="application/rss+xml"/>
     {$items}
   </channel>
 </rss>

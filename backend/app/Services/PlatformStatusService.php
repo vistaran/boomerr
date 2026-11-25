@@ -265,10 +265,13 @@ class PlatformStatusService
     public function getPlatformChecks(): array
     {
         return Cache::remember('platform_http_checks', 15, function () {
+            $frontendUrl = rtrim(config('app.frontend_url') ?? config('app.url', 'http://localhost:8080'), '/');
+            $apiUrl = rtrim(config('app.url', 'http://localhost:8080'), '/');
+
             $targets = [
-                ['name' => 'Web Dashboard', 'url' => config('services.platform.dashboard_url', 'https://app.boomerr.ai')],
-                ['name' => 'Public Website', 'url' => config('services.platform.website_url', 'https://boomerr.ai')],
-                ['name' => 'REST API', 'url' => config('services.platform.api_health_url', 'https://api.boomerr.ai/health')],
+                ['name' => 'Web Dashboard', 'url' => config('services.platform.dashboard_url', $frontendUrl)],
+                ['name' => 'Public Website', 'url' => config('services.platform.website_url', $frontendUrl)],
+                ['name' => 'REST API', 'url' => config('services.platform.api_health_url', $apiUrl . '/api/health')],
             ];
 
             $results = [];

@@ -959,13 +959,14 @@ function ToolRunner({ tool, onBack, onSelectTool }: ToolRunnerProps) {
                                 <input
                                     type="text"
                                     readOnly
-                                    value={`[![Uptime Status](${typeof window !== 'undefined' ? window.location.origin : ''}/api/tools/badge?domain=${badgeDomain || 'example.com'})](https://boomerr.ai)`}
+                                    value={`[![Uptime Status](${typeof window !== 'undefined' ? window.location.origin : ''}/api/tools/badge?domain=${badgeDomain || 'example.com'})](${typeof window !== 'undefined' ? window.location.origin : ''})`}
                                     className="w-full px-3.5 py-2.5 pr-24 bg-slate-950 border border-slate-800 rounded-xl text-slate-300 font-mono text-xs"
                                 />
                                 <button
                                     type="button"
                                     onClick={() => {
-                                        navigator.clipboard.writeText(`[![Uptime Status](${typeof window !== 'undefined' ? window.location.origin : ''}/api/tools/badge?domain=${badgeDomain || 'example.com'})](https://boomerr.ai)`);
+                                        const badgeOrigin = typeof window !== 'undefined' ? window.location.origin : '';
+                                        navigator.clipboard.writeText(`[![Uptime Status](${badgeOrigin}/api/tools/badge?domain=${badgeDomain || 'example.com'})](${badgeOrigin})`);
                                         setBadgeCopied(true);
                                         toast.success('Badge Markdown copied to clipboard');
                                         setTimeout(() => setBadgeCopied(false), 2000);

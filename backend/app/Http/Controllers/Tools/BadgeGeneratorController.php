@@ -49,7 +49,8 @@ class BadgeGeneratorController extends Controller
         curl_setopt($ch, CURLOPT_TIMEOUT, 5); // Fast timeout for badges
         curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
         curl_setopt($ch, CURLOPT_MAXREDIRS, 5);
-        curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (compatible; BoomerrBadgeBot/1.0; +https://boomerr.ai)');
+        $botHost = parse_url(config('app.url', 'http://localhost:8080'), PHP_URL_HOST) ?: 'localhost';
+        curl_setopt($ch, CURLOPT_USERAGENT, "Mozilla/5.0 (compatible; BoomerrBadgeBot/1.0; +https://{$botHost})");
 
         curl_exec($ch);
         $error = curl_error($ch);

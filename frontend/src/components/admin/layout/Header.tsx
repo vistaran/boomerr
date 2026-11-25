@@ -69,7 +69,7 @@ export const AdminHeader = () => {
     const path = location.pathname;
     if (path.includes("/admin/dashboard")) return { title: "Dashboard Overview", desc: "Monitor your platform metrics and recent activities." };
     if (path.includes("/admin/node-health")) return { title: "Execution Node Health", desc: "Real-time status & latency across all 5 monitoring regions." };
-    if (path.includes("/admin/boomerr-incidents")) return { title: "Platform Incidents Management", desc: "Manage public platform incidents displayed on boomerr.ai/status." };
+    if (path.includes("/admin/boomerr-incidents")) return { title: "Platform Incidents Management", desc: "Manage public platform incidents displayed on the public status page (/status)." };
     if (path.includes("/admin/users")) return { title: "Users Management", desc: "Manage and monitor user accounts and workspaces." };
     if (path.includes("/admin/email/templates")) return { title: "Email Templates", desc: "Manage and customize visual email templates." };
     if (path.includes("/admin/email/sequence")) return { title: "Email Sequences & Automations", desc: "Configure automated user onboarding, churn, and lifecycle campaigns." };

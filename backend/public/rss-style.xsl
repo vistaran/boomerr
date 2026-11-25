@@ -330,7 +330,12 @@
             <div class="meta-item">
               <span class="meta-label">Status Page</span>
               <span class="meta-value">
-                <a href="https://boomerr.ai/status">boomerr.ai/status</a>
+                <a>
+                  <xsl:attribute name="href">
+                    <xsl:value-of select="rss/channel/link" />
+                  </xsl:attribute>
+                  <xsl:value-of select="rss/channel/link" />
+                </a>
               </span>
             </div>
           </div>
@@ -367,9 +372,13 @@
 
           <!-- Footer -->
           <div class="footer">
-            Powered by <a href="https://boomerr.ai">Boomerr Uptime Monitoring</a> ·
-            <a href="https://boomerr.ai/status">Status Page</a> ·
-            <a href="https://boomerr.ai/privacy-policy">Privacy</a>
+            Powered by Boomerr Uptime Monitoring ·
+            <a>
+              <xsl:attribute name="href">
+                <xsl:value-of select="rss/channel/link" />
+              </xsl:attribute>
+              Status Page
+            </a>
           </div>
 
         </div>

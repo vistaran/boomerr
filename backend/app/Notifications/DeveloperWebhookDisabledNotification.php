@@ -38,7 +38,7 @@ class DeveloperWebhookDisabledNotification extends Notification
     public function toMail(object $notifiable): MailMessage
     {
             $workspaceUlid = $this->webhook->workspace ? $this->webhook->workspace->ulid : '';
-            $frontendUrl = rtrim(config('app.frontend_url', 'https://app.boomerr.ai'), '/');
+            $frontendUrl = rtrim(config('app.frontend_url') ?? config('app.url', 'http://localhost:8080'), '/');
 
             return (new MailMessage)
                 ->subject('Developer Webhook Automatically Disabled')

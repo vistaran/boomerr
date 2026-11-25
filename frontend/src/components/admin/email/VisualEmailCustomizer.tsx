@@ -58,11 +58,11 @@ export const DEFAULT_VISUAL_STATE: VisualState = {
   textColor: '#334155',
   footerBg: '#f8fafc',
   footerTextColor: '#64748b',
-  footerContent: 'You received this email because you registered on Boomerr.ai.',
+  footerContent: 'You received this email because you registered on Boomerr.',
 
   buttonEnabled: true,
   buttonText: 'Add Your First Domain →',
-  buttonUrl: 'https://app.boomerr.ai/overview',
+  buttonUrl: "{{ config('app.url') }}/overview",
   buttonBg: '#2563eb',
   buttonTextColor: '#ffffff',
   buttonRadius: '8px',
@@ -926,7 +926,7 @@ export const VisualEmailCustomizer: React.FC<VisualEmailCustomizerProps> = ({
                     }}
                     onChange={(e) => updateVisualField('footerContent', e.target.value)}
                     className="w-full bg-white dark:bg-[#111111] border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2.5 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-blue-500 transition-colors leading-relaxed"
-                    placeholder="e.g. You received this email because you registered on Boomerr.ai."
+                    placeholder="e.g. You received this email because you registered on Boomerr."
                   />
                 </div>
               </div>
@@ -986,7 +986,7 @@ export const VisualEmailCustomizer: React.FC<VisualEmailCustomizerProps> = ({
                       <span>Target URL / Dynamic Link</span>
                       <FieldTooltip
                         title="Target URL"
-                        content="The destination link URL. You can enter an absolute URL (https://app.boomerr.ai/overview) or a Blade expression (e.g., config('app.url') or $upgradeUrl)."
+                        content="The destination link URL. You can enter an absolute URL (e.g., https://yourdomain.com/overview) or a Blade expression (e.g., config('app.url') or $upgradeUrl)."
                       />
                     </label>
                     <input
@@ -994,7 +994,7 @@ export const VisualEmailCustomizer: React.FC<VisualEmailCustomizerProps> = ({
                       value={visual.buttonUrl}
                       onChange={(e) => updateVisualField('buttonUrl', e.target.value)}
                       className="w-full bg-white dark:bg-[#111111] border border-slate-200 dark:border-slate-800 rounded-xl px-4 py-2.5 text-sm font-mono text-slate-900 dark:text-white focus:outline-none focus:border-blue-500 transition-colors"
-                      placeholder="https://app.boomerr.ai/... or $upgradeUrl"
+                      placeholder="{{ config('app.url') }}/overview or $upgradeUrl"
                     />
                   </div>
 
@@ -1378,7 +1378,7 @@ export const VisualEmailCustomizer: React.FC<VisualEmailCustomizerProps> = ({
                     }}
                     onChange={(e) => updateVisualField('footerContent', e.target.value)}
                     className="w-full bg-white dark:bg-[#111111] border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-blue-500 transition-colors leading-relaxed"
-                    placeholder="e.g. You received this email because you registered on Boomerr.ai."
+                    placeholder="e.g. You received this email because you registered on Boomerr."
                   />
                 </div>
               </div>
@@ -1563,7 +1563,7 @@ export const VisualEmailCustomizer: React.FC<VisualEmailCustomizerProps> = ({
               >
                 <div
                   dangerouslySetInnerHTML={{
-                    __html: renderPreviewHtml(visual.footerContent || 'You received this email because you registered on Boomerr.ai.'),
+                    __html: renderPreviewHtml(visual.footerContent || 'You received this email because you registered on Boomerr.'),
                   }}
                 />
                 <div className="mt-1">

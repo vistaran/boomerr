@@ -80,6 +80,7 @@ class StatusPageApiController extends Controller
     ];
 
     $cfg = $statusLabels[$status] ?? $statusLabels['operational'];
+    $statusHost = (parse_url(config('app.frontend_url') ?? config('app.url', 'http://localhost:8080'), PHP_URL_HOST) ?: 'localhost') . '/status';
 
     $svg = <<<SVG
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
@@ -145,7 +146,7 @@ class StatusPageApiController extends Controller
 
   <!-- Footer -->
   <text x="80" y="550" fill="#475569" font-family="Inter, -apple-system, sans-serif" font-size="16" font-weight="500">
-    boomerr.ai/status · Updated live every 30 seconds
+    {$statusHost} · Updated live every 30 seconds
   </text>
 </svg>
 SVG;

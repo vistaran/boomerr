@@ -28,7 +28,7 @@ class GitHubAuthController extends Controller
      */
     public function callback(): RedirectResponse
     {
-        $frontendUrl = config('app.frontend_url', 'https://app.boomerr.ai');
+        $frontendUrl = config('app.frontend_url') ?? config('app.url', 'http://localhost:8080');
         $callbackPath = '/auth/callback';
 
         try {

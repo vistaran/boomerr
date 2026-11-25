@@ -98,7 +98,7 @@ export const BoomerrIncidents = () => {
             <ShieldAlert className="w-6 h-6 text-rose-500" />
             Platform Incidents Management
           </h1>
-          <p className="text-slate-600 dark:text-slate-400 dark:text-slate-400 text-sm mt-1">Manage public platform incidents displayed on boomerr.ai/status</p>
+          <p className="text-slate-600 dark:text-slate-400 dark:text-slate-400 text-sm mt-1">Manage public platform incidents displayed on the public status page (/status)</p>
         </div>
         <button
           onClick={() => { resetForm(); setShowModal(true); }}

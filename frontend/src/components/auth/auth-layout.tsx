@@ -116,7 +116,7 @@ export const AuthLayout: React.FC<AuthLayoutProps> = ({ children, title, subtitl
                 {/* Footer Copyright */}
                 <div className="mt-12 text-center">
                     <p className="text-xs font-bold text-slate-500 uppercase tracking-[0.3em]">
-                        &copy; {new Date().getFullYear()} Vistaran Tech. &bull; Secure Domain Monitoring
+                        &copy; {new Date().getFullYear()} Boomerr &bull; Open-Source Domain Monitoring
                     </p>
                 </div>
             </div>

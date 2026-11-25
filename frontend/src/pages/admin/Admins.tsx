@@ -364,7 +364,7 @@ export const AdminAdmins = () => {
                       ? "border-rose-500/80 bg-rose-500/[0.03] focus:border-rose-500 ring-1 ring-rose-500/30"
                       : "border-slate-200 dark:border-slate-800 focus:border-blue-500"
                   }`}
-                  placeholder="e.g. jane@boomerr.ai"
+                  placeholder="e.g. admin@example.com"
                 />
                 {createErrors.email && (
                   <p className="text-xs text-rose-400 mt-1.5 flex items-center gap-1">
@@ -475,7 +475,7 @@ export const AdminAdmins = () => {
                       ? "border-rose-500/80 bg-rose-500/[0.03] focus:border-rose-500 ring-1 ring-rose-500/30"
                       : "border-slate-200 dark:border-slate-800 focus:border-blue-500"
                   }`}
-                  placeholder="e.g. jane@boomerr.ai"
+                  placeholder="e.g. admin@example.com"
                 />
                 {editErrors.email && (
                   <p className="text-xs text-rose-400 mt-1.5 flex items-center gap-1">
