@@ -87,28 +87,28 @@ Self-hosted deployments run without artificial endpoint limits, paywalls, or ext
 
 ## ✨ Features
 
-### 🌐 Uptime & Certificate Monitoring
+### Uptime & Certificate Monitoring
 - **High-Frequency Health Checks:** Configurable HTTP/HTTPS probes with sub-minute intervals, response time tracking, and HTTP status code validation.
 - **SSL/TLS Certificate Tracking:** Native socket X.509 handshake inspection with automated warning alerts at 30, 14, and 3 days before expiration.
 - **Distributed Edge Probes:** Support for containerized (Docker) and serverless (AWS Lambda) probe nodes to verify latency and availability across multiple geographic regions.
 - **Live Event Streaming:** Real-time dashboard updates powered by Laravel Reverb without third-party messaging services.
 
-### 🛡️ Ad Spend Protection
+### Ad Spend Protection
 - **Automated Campaign Guard:** Direct integration with Google Ads and Meta (Facebook) Ads APIs.
 - **Budget Preservation:** Immediately pauses active campaigns when a landing page fails health checks, preventing wasted ad spend during downtime.
 - **Automatic Recovery:** Resumes paused campaigns automatically once verified consecutive successful checks are recorded.
 
-### 🤖 Incident Management & Auditing
+### Incident Management & Auditing
 - **Automated Root-Cause Triage:** Diagnostic analysis supporting local LLMs (Ollama) or hosted models (DeepSeek, OpenAI) alongside deterministic heuristic checks.
 - **Performance & SEO Audits:** Heuristic evaluation of response payloads, meta headers, Core Web Vitals indicators, and SSL configurations.
 - **Diagnostic Network Utilities:** Public diagnostic endpoints for DNS lookups, global DNS propagation verification, SSL chain inspection, and platform detection.
 
-### 📢 Notifications & Status Pages
+### Notifications & Status Pages
 - **Multi-Channel Alerting:** Dispatch incident notifications via SMTP email, Discord, Telegram, Slack, SMS (Twilio/MSG91), and WhatsApp.
 - **Customizable Status Pages:** Host public or private status pages on custom domains with historical uptime records and incident communications.
 - **Subscriber Notifications:** Allow end-users to subscribe to status page incident feeds via email.
 
-### 🔒 Security & Multi-Tenancy
+### Security & Multi-Tenancy
 - **Workspaces & RBAC:** Organization-level data isolation with granular role assignments (Owner, Admin, Member).
 - **SSRF Prevention:** Private IP blocking and DNS rebinding protections for all user-submitted target endpoints.
 - **Container Architecture:** Production-ready multi-container configuration orchestrated via Docker Compose.
