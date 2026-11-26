@@ -29,7 +29,7 @@ RUN composer install \
 # -------------------------------------------------------------
 # Stage 3: Backend Application Image (PHP 8.2-FPM Alpine)
 # -------------------------------------------------------------
-FROM php:8.2-fpm-alpine AS app
+FROM php:8.5-fpm-alpine AS app
 
 # Install system dependencies
 RUN apk add --no-cache \
