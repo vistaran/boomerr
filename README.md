@@ -10,6 +10,7 @@
 
 <p align="center">
   <a href="https://github.com/vistaran/boomerr/actions/workflows/ci.yml"><img src="https://github.com/vistaran/boomerr/actions/workflows/ci.yml/badge.svg" alt="CI Status" /></a>
+  <a href="https://discord.gg/Sw5rrQ26MP"><img src="https://img.shields.io/badge/Discord-Join%20Community-5865F2?style=flat-square&logo=discord&logoColor=white" alt="Discord Community" /></a>
   <img src="https://img.shields.io/badge/PHP-8.2-777BB4?style=flat-square&logo=php&logoColor=white" alt="PHP 8.2" />
   <img src="https://img.shields.io/badge/Laravel-12-FF2D20?style=flat-square&logo=laravel&logoColor=white" alt="Laravel 12" />
   <img src="https://img.shields.io/badge/React-19-61DAFB?style=flat-square&logo=react&logoColor=black" alt="React 19" />
@@ -125,7 +126,17 @@ Detailed guides are available in the [`docs/`](docs/) directory:
 
 ## 🤝 Contributing
 
-We welcome community contributions, bug reports, and pull requests! Please ensure any code changes include relevant unit or feature tests.
+We welcome community contributions, bug reports, and pull requests! Please ensure any code changes include relevant unit or feature tests. See [CONTRIBUTING.md](CONTRIBUTING.md) for details.
+
+---
+
+## 💬 Community & Support
+
+Join our growing community of developers, sysadmins, and self-hosters:
+
+- 💬 **Discord:** Join the [Boomerr Discord Community](https://discord.gg/Sw5rrQ26MP) for real-time discussion, troubleshooting, and feature previews.
+- 💡 **GitHub Discussions:** Ask questions or suggest ideas in [GitHub Discussions](https://github.com/vistaran/boomerr/discussions).
+- 🐛 **Issue Tracker:** Report bugs or submit feature requests on [GitHub Issues](https://github.com/vistaran/boomerr/issues).
 
 ---
 

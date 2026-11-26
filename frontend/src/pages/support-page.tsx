@@ -41,7 +41,7 @@ function DiscordIcon({ className = "w-5 h-5" }: { className?: string }) {
 }
 
 const SUPPORT_EMAIL = import.meta.env.VITE_SUPPORT_EMAIL || "community@boomerr.org";
-const DISCORD_INVITE_URL = "https://discord.gg/SwfzDwxExc";
+const DISCORD_INVITE_URL = "https://discord.gg/Sw5rrQ26MP";
 
 const FAQS = [
     {

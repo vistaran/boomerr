@@ -87,4 +87,6 @@ docker compose exec api php artisan boomerr:doctor
 
 ## Questions and Support
 
-If you need guidance or have questions before starting work on a feature, feel free to open a GitHub Discussion or join our community chat.
+If you need guidance or have questions before starting work on a feature:
+* Join our [Discord Community](https://discord.gg/Sw5rrQ26MP) to chat with maintainers in `#dev` or `#contributors`.
+* Open a [GitHub Discussion](https://github.com/vistaran/boomerr/discussions).
