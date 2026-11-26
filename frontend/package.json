@@ -13,7 +13,7 @@
     "@hcaptcha/react-hcaptcha": "^1.17.1",
     "@laravel/echo-react": "^2.2.6",
     "@react-oauth/google": "^0.12.2",
-    "@tailwindcss/vite": "^4.1.17",
+    "@tailwindcss/vite": "^4.3.5",
     "@tanstack/react-query": "^5.90.12",
     "@tanstack/react-query-devtools": "^5.91.1",
     "axios": "^1.13.2",
