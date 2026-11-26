@@ -20,7 +20,7 @@
 
 ---
 
-## Overview
+## ⚡ Overview
 
 Boomerr is an open-source, self-hosted platform for uptime monitoring, SSL certificate tracking, incident diagnosis, and status page hosting. Built for developers, site reliability engineers, and marketing teams, Boomerr also includes native ad spend protection: when an outage is detected, active Google Ads and Meta Ads campaigns are automatically paused to prevent wasted ad budget, then resumed once the endpoint recovers.
 
@@ -28,39 +28,39 @@ Self-hosted deployments run without artificial endpoint limits, paywalls, or ext
 
 ---
 
-## Product Tour
+## 📸 Product Tour
 
 <div align="center">
 
-### Operations Dashboard
+### 📊 Operations Dashboard
 *Real-time visibility across monitored endpoints, response latency sparklines, SSL certificate status, and 30-day uptime metrics.*
 <br/>
 <img src="docs/images/dashboard-overview.png" alt="Boomerr Operations Dashboard" width="95%" />
 
 <br/><br/>
 
-### Domain Health & Root-Cause Diagnostics
+### 🔍 Domain Health & Root-Cause Diagnostics
 *Sub-second latency records, automated incident triage, and integrated audits for performance, SEO, and user experience.*
 <br/>
 <img src="docs/images/domain-overview.png" alt="Domain Overview and Root-Cause Diagnostics" width="95%" />
 
 <br/><br/>
 
-### Multi-Region Edge Monitoring
+### 🌍 Multi-Region Edge Monitoring
 *Distributed probe architecture measuring uptime and latency across global regions including North America, Europe, Asia, and Africa.*
 <br/>
 <img src="docs/images/global-edge-monitoring.png" alt="Global Edge Monitoring" width="95%" />
 
 <br/><br/>
 
-### Automated Ad Spend Protection
+### 🛡️ Automated Ad Spend Protection
 *Synchronize connected Google Ads and Meta Ads accounts to pause active campaigns during downtime and resume them upon recovery.*
 <br/>
 <img src="docs/images/ads-protection.png" alt="Ads Protection Engine" width="95%" />
 
 <br/><br/>
 
-### Public Status Pages
+### 📢 Public Status Pages
 *Branded status pages with custom domains, real-time incident updates, 30-day uptime bars, and subscriber notifications.*
 <br/>
 <img src="docs/images/public-status-page.png" alt="Public Status Page" width="95%" />
@@ -69,7 +69,7 @@ Self-hosted deployments run without artificial endpoint limits, paywalls, or ext
 
 ---
 
-## Why Boomerr?
+## ⚖️ Why Boomerr?
 
 | Capability | Boomerr (Community) | Uptime Kuma | Better Stack | Pingdom |
 |---|:---:|:---:|:---:|:---:|
@@ -85,37 +85,37 @@ Self-hosted deployments run without artificial endpoint limits, paywalls, or ext
 
 ---
 
-## Features
+## ✨ Features
 
-### Uptime & Certificate Monitoring
+### 🌐 Uptime & Certificate Monitoring
 - **High-Frequency Health Checks:** Configurable HTTP/HTTPS probes with sub-minute intervals, response time tracking, and HTTP status code validation.
 - **SSL/TLS Certificate Tracking:** Native socket X.509 handshake inspection with automated warning alerts at 30, 14, and 3 days before expiration.
 - **Distributed Edge Probes:** Support for containerized (Docker) and serverless (AWS Lambda) probe nodes to verify latency and availability across multiple geographic regions.
 - **Live Event Streaming:** Real-time dashboard updates powered by Laravel Reverb without third-party messaging services.
 
-### Ad Spend Protection
+### 🛡️ Ad Spend Protection
 - **Automated Campaign Guard:** Direct integration with Google Ads and Meta (Facebook) Ads APIs.
 - **Budget Preservation:** Immediately pauses active campaigns when a landing page fails health checks, preventing wasted ad spend during downtime.
 - **Automatic Recovery:** Resumes paused campaigns automatically once verified consecutive successful checks are recorded.
 
-### Incident Management & Auditing
+### 🤖 Incident Management & Auditing
 - **Automated Root-Cause Triage:** Diagnostic analysis supporting local LLMs (Ollama) or hosted models (DeepSeek, OpenAI) alongside deterministic heuristic checks.
 - **Performance & SEO Audits:** Heuristic evaluation of response payloads, meta headers, Core Web Vitals indicators, and SSL configurations.
 - **Diagnostic Network Utilities:** Public diagnostic endpoints for DNS lookups, global DNS propagation verification, SSL chain inspection, and platform detection.
 
-### Notifications & Status Pages
+### 📢 Notifications & Status Pages
 - **Multi-Channel Alerting:** Dispatch incident notifications via SMTP email, Discord, Telegram, Slack, SMS (Twilio/MSG91), and WhatsApp.
 - **Customizable Status Pages:** Host public or private status pages on custom domains with historical uptime records and incident communications.
 - **Subscriber Notifications:** Allow end-users to subscribe to status page incident feeds via email.
 
-### Security & Multi-Tenancy
+### 🔒 Security & Multi-Tenancy
 - **Workspaces & RBAC:** Organization-level data isolation with granular role assignments (Owner, Admin, Member).
 - **SSRF Prevention:** Private IP blocking and DNS rebinding protections for all user-submitted target endpoints.
 - **Container Architecture:** Production-ready multi-container configuration orchestrated via Docker Compose.
 
 ---
 
-## Quickstart
+## 🚀 Quickstart
 
 ### Prerequisites
 - Docker Engine 24.0+
@@ -140,7 +140,7 @@ Open `http://localhost:8080` in your browser and sign in with the administrator 
 
 ---
 
-## Management CLI
+## 🛠️ Management CLI
 
 Boomerr includes built-in Artisan commands for administrative workflows:
 
@@ -154,7 +154,7 @@ Boomerr includes built-in Artisan commands for administrative workflows:
 
 ---
 
-## Architecture
+## 📦 Architecture
 
 ```
                     [ Port 8080 (HTTP) ]
@@ -181,7 +181,7 @@ Boomerr includes built-in Artisan commands for administrative workflows:
 
 ---
 
-## Documentation
+## 📚 Documentation
 
 Detailed setup guides and reference manuals:
 
@@ -194,13 +194,13 @@ Detailed setup guides and reference manuals:
 
 ---
 
-## Contributing
+## 🤝 Contributing
 
 Contributions, bug reports, and pull requests are welcome. Please ensure new features or bug fixes include corresponding unit or integration tests. Review [CONTRIBUTING.md](CONTRIBUTING.md) for contribution guidelines.
 
 ---
 
-## Community
+## 💬 Community
 
 - **Discord:** Join the [Boomerr Discord Community](https://discord.gg/Sw5rrQ26MP) for technical discussion, release previews, and troubleshooting.
 - **GitHub Discussions:** Propose features or ask architectural questions in [Discussions](https://github.com/vistaran/boomerr/discussions).
@@ -208,12 +208,12 @@ Contributions, bug reports, and pull requests are welcome. Please ensure new fea
 
 ---
 
-## Star History
+## ⭐ Star History
 
 [![Star History Chart](https://api.star-history.com/svg?repos=vistaran/boomerr&type=Date)](https://star-history.com/#vistaran/boomerr&Date)
 
 ---
 
-## License
+## 📄 License
 
 Boomerr is open-source software licensed under the **GNU Affero General Public License v3.0 (AGPL-3.0)**.
