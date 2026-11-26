@@ -5,7 +5,7 @@
 <h1 align="center">Boomerr - Self-Hosted Website & Domain Monitoring</h1>
 
 <p align="center">
-  <strong>An open-source, full-stack website monitoring, SSL tracking, incident diagnosis, and public status page platform.</strong>
+  <strong>An open-source, full-stack website monitoring, SSL tracking, incident diagnosis, and public status page platform with automated Ads Protection.</strong>
 </p>
 
 <p align="center">
@@ -22,9 +22,68 @@
 
 ## ⚡ Overview
 
-Boomerr is an open-source, self-hosted website and domain monitoring platform designed for developers, sysadmins, agencies, and businesses. Monitor unlimited endpoints, track SSL certificates, diagnose outages with optional AI diagnostics, and publish customizable status pages for your users.
+Boomerr is an open-source, self-hosted website and domain monitoring platform designed for developers, sysadmins, e-commerce brands, agencies, and businesses. Monitor unlimited endpoints, track SSL certificates, pause burning ad spend with automated Ads Protection, diagnose outages with AI-powered root cause analysis, and publish customizable status pages for your users.
 
 Self-hosted Boomerr instances run in **Community Edition** mode with zero paywalls, zero artificial limits, and zero external telemetry.
+
+---
+
+## 📸 Product Tour
+
+<div align="center">
+
+### 📊 Real-Time Operations & Cluster Dashboard
+*Monitor all your domains, HTTP response latencies, SSL certificates, and 30-day uptime records in a live unified view.*
+<br/>
+<img src="docs/images/dashboard-overview.png" alt="Boomerr Dashboard Overview" width="95%" />
+
+<br/><br/>
+
+### 🔍 Deep Domain Health & Incident Root Cause Analysis
+*Drill into sub-second latency sparklines, review automated AI incident diagnosis, and get instant SEO & performance health audits.*
+<br/>
+<img src="docs/images/domain-overview.png" alt="Domain Overview & AI Root Cause" width="95%" />
+
+<br/><br/>
+
+### 🌍 Multi-Region Global Edge Monitoring
+*Track global latency and uptime from distributed edge probes across North America, Europe, Asia, and Africa.*
+<br/>
+<img src="docs/images/global-edge-monitoring.png" alt="Global Edge Monitoring" width="95%" />
+
+<br/><br/>
+
+### 🛡️ Automated Ads Protection (Google Ads & Meta Ads)
+*Connect your ad accounts. Boomerr automatically pauses active campaigns when a landing page goes down and resumes them upon recovery.*
+<br/>
+<img src="docs/images/ads-protection.png" alt="Ads Protection Engine" width="95%" />
+
+<br/><br/>
+
+### 📢 Branded Public Status Pages
+*Share live incident updates and uptime transparency with your users via custom branded public status pages.*
+<br/>
+<img src="docs/images/public-status-page.png" alt="Public Status Page" width="95%" />
+
+</div>
+
+---
+
+## 🆚 Why Boomerr?
+
+How does Boomerr compare to other popular monitoring platforms?
+
+| Feature | Boomerr (Community) | Uptime Kuma | Better Stack | Pingdom |
+|---|:---:|:---:|:---:|:---:|
+| **Open Source & Self-Hostable** | ✅ Yes (AGPL-3.0) | ✅ Yes (MIT) | ❌ Proprietary | ❌ Proprietary |
+| **Ads Protection (Google & Meta)** | ✅ **Native** | ❌ No | ❌ No | ❌ No |
+| **AI Root Cause & Incident Diagnostics** | ✅ **Built-in** | ❌ No | ⚠️ Cloud Only | ❌ No |
+| **Multi-Region Edge Probes** | ✅ Lambda & Docker | ⚠️ Third-party | ✅ Cloud Only | ✅ Cloud Only |
+| **Real-Time WebSockets** | ✅ Native (Laravel Reverb) | ✅ Socket.io | ✅ Cloud Only | ❌ Polling |
+| **Multi-Workspace & Role-Based Access** | ✅ Built-in RBAC | ⚠️ Basic single | ✅ Cloud Only | ✅ Paid tiers |
+| **Built-in SEO & Performance Auditing** | ✅ Built-in | ❌ No | ❌ No | ❌ No |
+| **SSL Handshake & Expiry Tracking** | ✅ X.509 Socket Handshake | ✅ Basic | ✅ Cloud Only | ✅ Cloud Only |
+| **Self-Hosted Pricing** | 💚 **100% Free** | 💚 100% Free | 💰 Paid SaaS | 💰 Paid SaaS |
 
 ---
 
@@ -137,6 +196,12 @@ Join our growing community of developers, sysadmins, and self-hosters:
 - 💬 **Discord:** Join the [Boomerr Discord Community](https://discord.gg/Sw5rrQ26MP) for real-time discussion, troubleshooting, and feature previews.
 - 💡 **GitHub Discussions:** Ask questions or suggest ideas in [GitHub Discussions](https://github.com/vistaran/boomerr/discussions).
 - 🐛 **Issue Tracker:** Report bugs or submit feature requests on [GitHub Issues](https://github.com/vistaran/boomerr/issues).
+
+---
+
+## ⭐ Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=vistaran/boomerr&type=Date)](https://star-history.com/#vistaran/boomerr&Date)
 
 ---
 
